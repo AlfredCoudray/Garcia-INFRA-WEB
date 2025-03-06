@@ -1,701 +1,983 @@
-/*-----------------------------------------------------------------
-
-Template Name: Extech - IT Solution & Technology HTML Template<
-Author:  ex-coders
-Author URI: https://themeforest.net/user/ex-coders
-Developer: Masirul Islam
-Version: 1.0.0
-Description: Extech - IT Solution & Technology HTML Template<
-
--------------------------------------------------------------------
-Js TABLE OF CONTENTS
--------------------------------------------------------------------
-
-01. header
-02. animated text with swiper slider
-03. magnificPopup
-04. counter up 
-05. wow animation
-06. nice select
-07. swiper slider
-08. team hover effect
-09. search popup
-10. mouse cursor
-11. Set Background Image
-12. Global Slider
-13. Progress Bar Animation 
-14. Checkbox
-15. preloader
-
-------------------------------------------------------------------*/
-
 (function ($) {
-    "use strict";
-
-    $(document).ready(function () {
-
-        //>> Mobile Menu Js Start <<//
-        $('#mobile-menu').meanmenu({
-            meanMenuContainer: '.mobile-menu',
-            meanScreenWidth: "991",
-            meanExpand: ['<i class="far fa-plus"></i>'],
-        });
-
-        //>> Sidebar Toggle Js Start <<//
-        $(".offcanvas__close,.offcanvas__overlay").on("click", function () {
-            $(".offcanvas__info").removeClass("info-open");
-            $(".offcanvas__overlay").removeClass("overlay-open");
-        });
-        $(".sidebar__toggle").on("click", function () {
-            $(".offcanvas__info").addClass("info-open");
-            $(".offcanvas__overlay").addClass("overlay-open");
-        });
-
-        //>> Body Overlay Js Start <<//
-        $(".body-overlay").on("click", function () {
-            $(".offcanvas__area").removeClass("offcanvas-opened");
-            $(".df-search-area").removeClass("opened");;
-            $(".body-overlay").removeClass("opened");
-        });
-
-        //>> Sticky Header Js Start <<//
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 250) {
-                $("#header-sticky").addClass("sticky");
-            } else {
-                $("#header-sticky").removeClass("sticky");
-            }
-        });
-
-        //>> Hero-1 Slider Start <<//
-        const sliderActive2 = ".hero-slider";
-        const sliderInit2 = new Swiper(sliderActive2, {
-            loop: true,
-            slidesPerView: 1,
-            effect: "fade",
-            speed: 3000,
-            autoplay: {
-                delay: 7000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".array-prev",
-                prevEl: ".array-next",
-            },
-        });
-
-        function animated_swiper(selector, init) {
-            const animated = function animated() {
-                $(selector + " [data-animation]").each(function () {
-                    let anim = $(this).data("animation");
-                    let delay = $(this).data("delay");
-                    let duration = $(this).data("duration");
-                    $(this)
-                        .removeClass("anim" + anim)
-                        .addClass(anim + " animated")
-                        .css({
-                            webkitAnimationDelay: delay,
-                            animationDelay: delay,
-                            webkitAnimationDuration: duration,
-                            animationDuration: duration,
-                        })
-                        .one("animationend", function () {
-                            $(this).removeClass(anim + " animated");
-                        });
-                });
-            };
-            animated();
-            init.on("slideChange", function () {
-                $(sliderActive2 + " [data-animation]").removeClass("animated");
-            });
-            init.on("slideChange", animated);
-        }
-        animated_swiper(sliderActive2, sliderInit2);
-        //>> Banner Animation <<//
-
-
-
-
-        //>> Magnific Popup <<//   
-        /* magnificPopup img view */
-        $(".popup-image").magnificPopup({
-            type: "image",
-            mainClass: 'mfp-zoom-in',
-            removalDelay: 260,
-            gallery: {
-                enabled: true,
-            },
-        });
-
-
-
-        /* magnificPopup video view */
-        $(".popup-video").magnificPopup({
-            type: "iframe",
-            removalDelay: 260,
-            mainClass: 'mfp-zoom-in',
-        });
-
-
-
-        /* magnificPopup video view */
-        $(".popup-content").magnificPopup({
-            type: "inline",
-            midClick: true,
-        });
-
-
-
-        //>> Video Popup Start <<//
-        $(".img-popup").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: true,
-            },
-        });
-
-
-
-        //>> Counter Up  <<//    
-        $(".counter-number").counterUp({
-            delay: 10,
-            time: 1000,
-        });
-
-
-
-        //>> Wow Animation Start <<//
-        new WOW().init();
-
-
-
-        //>> Nice Select Start <<//
-        $('select').niceSelect();
-
-
-
-        //>> Brand Slider Start <<//
-        const brandSlider = new Swiper(".brand-slider", {
-            spaceBetween: 30,
-            speed: 1300,
-            loop: true,
-            centeredSlides: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-
-            breakpoints: {
-                1199: {
-                    slidesPerView: 5,
-                },
-                991: {
-                    slidesPerView: 4,
-                },
-                767: {
-                    slidesPerView: 3,
-                },
-                575: {
-                    slidesPerView: 2,
-                },
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-        const brandSlider2 = new Swiper(".brand-slider-2", {
-            spaceBetween: 30,
-            speed: 1300,
-            loop: true,
-            centeredSlides: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-
-            breakpoints: {
-                1199: {
-                    slidesPerView: 5,
-                },
-                991: {
-                    slidesPerView: 4,
-                },
-                767: {
-                    slidesPerView: 3,
-                },
-                575: {
-                    slidesPerView: 2,
-                },
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-
-
-        //>> Service Slider Start <<// 
-        const serviceSlider2 = new Swiper(".service-slider-2", {
-            spaceBetween: 30,
-            speed: 1500,
-            loop: true,
-            autoplay: {
-                delay: 1500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".dot-2",
-                clickable: true,
-            },
-
-            breakpoints: {
-                1199: {
-                    slidesPerView: 4,
-                },
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-                575: {
-                    slidesPerView: 2,
-                },
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-
-
-        //>> Project Slider Start <<// 
-        const projectSlider2 = new Swiper(".project-slider-2", {
-            spaceBetween: 30,
-            speed: 1500,
-            loop: true,
-            autoplay: {
-                delay: 1500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".dot-2",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".array-prev",
-                prevEl: ".array-next",
-            },
-            breakpoints: {
-                1199: {
-                    slidesPerView: 3,
-                },
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-
-                575: {
-                    slidesPerView: 1,
-                },
-
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-        const projectSlider3 = new Swiper(".project-slider-3", {
-            spaceBetween: 30,
-            speed: 1500,
-            loop: true,
-            autoplay: {
-                delay: 1500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".dot-2",
-                clickable: true,
-            },
-            breakpoints: {
-                1199: {
-                    slidesPerView: 4,
-                },
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-                650: {
-                    slidesPerView: 2,
-                },
-
-                575: {
-                    slidesPerView: 1,
-                },
-
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-
-
-        //>> Testimonial Slider Start <<// 
-
-        const testimonialSlider2 = new Swiper(".testimonial-slider-2", {
-            speed: 1500,
-            loop: true,
-            spaceBetween: 30,
-            autoplay: {
-                delay: 1500,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".array-prev",
-                prevEl: ".array-next",
-            },
-            breakpoints: {
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 1,
-                },
-
-                575: {
-                    slidesPerView: 1,
-                },
-
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-
-        });
-
-
-
-        //>> News Slider Start <<//
-        const newsSlider = new Swiper(".news-slider", {
-            spaceBetween: 30,
-            speed: 1500,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: false,
-            },
-            navigation: {
-                nextEl: ".array-prev",
-                prevEl: ".array-next",
-            },
-            breakpoints: {
-                1199: {
-                    slidesPerView: 3,
-                },
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-
-                575: {
-                    slidesPerView: 1,
-                },
-
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-
-
-        //>> Team Slider Start <<//
-        const teamSlider = new Swiper(".team-slider", {
-            spaceBetween: 30,
-            speed: 1500,
-            loop: true,
-            autoplay: {
-                delay: 1500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".dot-2",
-                clickable: true,
-            },
-
-            breakpoints: {
-                1199: {
-                    slidesPerView: 4,
-                },
-                991: {
-                    slidesPerView: 2,
-                },
-                767: {
-                    slidesPerView: 2,
-                },
-                575: {
-                    slidesPerView: 2,
-                },
-                0: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-
-
-
-        //>> Team Hover Image Show Slider Start <<//
-        const teamItems = document.querySelectorAll(".team-items");
-
-        function followImageCursor(event, teamItems) {
-            const contentBox = teamItems.getBoundingClientRect();
-            const dx = event.clientX - contentBox.x;
-            const dy = event.clientY - contentBox.y;
-            teamItems.children[2].style.transform = `translate(${dx}px, ${dy}px) rotate(0)`;
-        }
-
-        teamItems.forEach((item, i) => {
-            item.addEventListener("mousemove", (event) => {
-                setInterval(followImageCursor(event, item), 1000);
-            });
-        });
-
-
-        //>> Search Popup Start <<//
-        const $searchWrap = $(".search-wrap");
-        const $navSearch = $(".nav-search");
-        const $searchClose = $("#search-close");
-
-        $(".search-trigger").on("click", function (e) {
-            e.preventDefault();
-            $searchWrap.animate({ opacity: "toggle" }, 500);
-            $navSearch.add($searchClose).addClass("open");
-        });
-
-        $(".search-close").on("click", function (e) {
-            e.preventDefault();
-            $searchWrap.animate({ opacity: "toggle" }, 500);
-            $navSearch.add($searchClose).removeClass("open");
-        });
-
-        function closeSearch() {
-            $searchWrap.fadeOut(200);
-            $navSearch.add($searchClose).removeClass("open");
-        }
-
-        $(document.body).on("click", function (e) {
-            closeSearch();
-        });
-
-        $(".search-trigger, .main-search-input").on("click", function (e) {
-            e.stopPropagation();
-        });
-
-        //>> Mouse Cursor Start <<//
-        function mousecursor() {
-            if ($("body")) {
-                const e = document.querySelector(".cursor-inner"),
-                    t = document.querySelector(".cursor-outer");
-                let n,
-                    i = 0,
-                    o = !1;
-                (window.onmousemove = function (s) {
-                    o ||
-                        (t.style.transform =
-                            "translate(" + s.clientX + "px, " + s.clientY + "px)"),
-                        (e.style.transform =
-                            "translate(" + s.clientX + "px, " + s.clientY + "px)"),
-                        (n = s.clientY),
-                        (i = s.clientX);
-                }),
-                    $("body").on("mouseenter", "a, .cursor-pointer", function () {
-                        e.classList.add("cursor-hover"), t.classList.add("cursor-hover");
-                    }),
-                    $("body").on("mouseleave", "a, .cursor-pointer", function () {
-                        ($(this).is("a") && $(this).closest(".cursor-pointer").length) ||
-                            (e.classList.remove("cursor-hover"),
-                                t.classList.remove("cursor-hover"));
-                    }),
-                    (e.style.visibility = "visible"),
-                    (t.style.visibility = "visible");
-            }
-        }
-        $(function () {
-            mousecursor();
-        });
-
-
-
-        //>> Set Background Image  & Mask<<// 
-        if ($("[data-bg-src]").length > 0) {
-            $("[data-bg-src]").each(function () {
-                var src = $(this).attr("data-bg-src");
-                $(this).css("background-image", "url(" + src + ")");
-                $(this).removeAttr("data-bg-src").addClass("background-image");
-            });
-        }
-
-        if ($('[data-mask-src]').length > 0) {
-            $('[data-mask-src]').each(function () {
-                var mask = $(this).attr('data-mask-src');
-                $(this).css({
-                    'mask-image': 'url(' + mask + ')',
-                    '-webkit-mask-image': 'url(' + mask + ')'
-                });
-                $(this).addClass('bg-mask');
-                $(this).removeAttr('data-mask-src');
-            });
-        };
-
-
-        //>> Global Slider<<//  
-        $('.gt-slider').each(function () {
-            var gtSlider = $(this);
-            var settings = $(this).data('slider-options');
-
-            // Log settings to verify initialSlide
-            console.log("Slider settings: ", settings);
-
-            // Store references to the navigation Slider
-            var prevArrow = gtSlider.find('.slider-prev');
-            var nextArrow = gtSlider.find('.slider-next');
-            var paginationEl = gtSlider.find('.slider-pagination');
-            var paginationElN = gtSlider.find('.slider-pagination.pagi-number');
-
-            var paginationType = settings['paginationType'] ? settings['paginationType'] : 'bullets';
-
-            var autoplayconditon = settings['autoplay'];
-
-            var sliderDefault = {
-                slidesPerView: 1,
-                spaceBetween: settings['spaceBetween'] ? settings['spaceBetween'] : 24,
-                loop: settings['loop'] == false ? false : true,
-                speed: settings['speed'] ? settings['speed'] : 1000,
-                initialSlide: settings['initialSlide'] ? settings['initialSlide'] : 0,  // Default to 0 if not set
-                centeredSlides: settings['centeredSlides'] == true ? true : false,
-                autoplay: autoplayconditon ? autoplayconditon : { delay: 6000, disableOnInteraction: false },
-                navigation: {
-                    nextEl: nextArrow.get(0),
-                    prevEl: prevArrow.get(0),
-                },
-                pagination: {
-                    el: paginationEl.get(0),
-                    type: paginationType,
-                    clickable: true,
-                    renderBullet: function (index, className) {
-                        var number = index + 1;
-                        var formattedNumber = number < 10 ? '0' + number : number;
-                        if (paginationElN.length) {
-                            return '<span class="' + className + ' number">' + formattedNumber + '</span>';
-                        } else {
-                            return '<span class="' + className + '" aria-label="Go to Slide ' + formattedNumber + '"></span>';
-                        }
-                    },
-                },
-                on: {
-                    slideChange: function () {
-                        setTimeout(function () {
-                            swiper.params.mousewheel.releaseOnEdges = false;
-                        }, 500);
-                    },
-                    reachEnd: function () {
-                        setTimeout(function () {
-                            swiper.params.mousewheel.releaseOnEdges = true;
-                        }, 750);
-                    }
-                }
-            };
-
-            var options = $.extend({}, sliderDefault, settings);
-            console.log("Final Swiper options: ", options);  // Log final options to check initialSlide
-
-            var swiper = new Swiper(gtSlider.get(0), options); // Assign the swiper variable
-
-            if ($('.slider-area').length > 0) {
-                $('.slider-area').closest(".container").parent().addClass("arrow-wrap");
-            }
-
-        });
-
-        // Function to add animation classes
-        function animationProperties() {
-            $('[data-ani]').each(function () {
-                var animationName = $(this).data('ani');
-                $(this).addClass(animationName);
-            });
-
-            $('[data-ani-delay]').each(function () {
-                var delayTime = $(this).data('ani-delay');
-                $(this).css('animation-delay', delayTime);
-            });
-        }
-        animationProperties();
-
-        // Add click event handlers for external slider arrows based on data attributes
-        $('[data-slider-prev], [data-slider-next]').on('click', function () {
-            var sliderSelector = $(this).data('slider-prev') || $(this).data('slider-next');
-            var targetSlider = $(sliderSelector);
-
-            if (targetSlider.length) {
-                var swiper = targetSlider[0].swiper;
-
-                if (swiper) {
-                    if ($(this).data('slider-prev')) {
-                        swiper.slidePrev();
-                    } else {
-                        swiper.slideNext();
-                    }
-                }
-            }
-        });
-
-
-        //>> Progress Bar Animation  <<//     
-        $('.progress-bar').each(function () {
-            var $this = $(this);
-            var progressWidth = $this.attr('style').match(/width:\s*(\d+)%/)[1] + '%';
-
-            $this.waypoint(function () {
-                $this.css({
-                    '--progress-width': progressWidth,
-                    'animation': 'animate-positive 1.8s forwards',
-                    'opacity': '1'
-                });
-            }, { offset: '75%' });
-        });
-
-
-        //>> Checkbox <<//      
-        const checkbox = $('#agreeCheckbox');
-        const submitButton = $('#submitButton');
-
-        checkbox.on('change', function () {
-            submitButton.prop('disabled', !this.checked);
-        });
-
-
-
-    }); // End Document Ready Function
-
-    function loader() {
-        $(window).on('load', function () {
-            // Animate loader off screen
-            $(".preloader").addClass('loaded');
-            $(".preloader").delay(600).fadeOut();
-        });
+  "use strict";
+  
+  // ==========================================
+  //      Start Document Ready function
+  // ==========================================
+  $(document).ready(function () {
+    
+  // ============== Mobile Menu Sidebar & Offcanvas Js Start ========
+  $('.toggle-mobileMenu').on('click', function () {
+    $('.mobile-menu').addClass('active');
+    $('.side-overlay').addClass('show');
+    $('body').addClass('scroll-hide-sm');
+  }); 
+
+  $('.close-button, .side-overlay').on('click', function () {
+    $('.mobile-menu').removeClass('active');
+    $('.side-overlay').removeClass('show');
+    $('body').removeClass('scroll-hide-sm');
+  }); 
+  // ============== Mobile Menu Sidebar & Offcanvas Js End ========
+  
+  // ============== Mobile Nav Menu Dropdown Js Start =======================
+  var windowWidth = $(window).width(); 
+  
+  $('.has-submenu').on('click', function () {
+    var thisItem = $(this); 
+    
+    if(windowWidth < 992) {
+      if(thisItem.hasClass('active')) {
+        thisItem.removeClass('active')
+      } else {
+        $('.has-submenu').removeClass('active')
+        $(thisItem).addClass('active')
+      }
+      
+      var submenu = thisItem.find('.nav-submenu');
+      
+      $('.nav-submenu').not(submenu).slideUp(300);
+      submenu.slideToggle(300);
     }
+    
+  });
+  // ============== Mobile Nav Menu Dropdown Js End =======================
+    
+  // ===================== Scroll Back to Top Js Start ======================
+  var progressPath = document.querySelector('.progress-wrap path');
+  var pathLength = progressPath.getTotalLength();
+  progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
+  progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+  progressPath.style.strokeDashoffset = pathLength;
+  progressPath.getBoundingClientRect();
+  progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
+  var updateProgress = function () {
+    var scroll = $(window).scrollTop();
+    var height = $(document).height() - $(window).height();
+    var progress = pathLength - (scroll * pathLength / height);
+    progressPath.style.strokeDashoffset = progress;
+  }
+  updateProgress();
+  $(window).scroll(updateProgress);
+  var offset = 50;
+  var duration = 550;
+  jQuery(window).on('scroll', function() {
+    if (jQuery(this).scrollTop() > offset) {
+      jQuery('.progress-wrap').addClass('active-progress');
+    } else {
+      jQuery('.progress-wrap').removeClass('active-progress');
+    }
+  });
+  jQuery('.progress-wrap').on('click', function(event) {
+    event.preventDefault();
+    jQuery('html, body').animate({scrollTop: 0}, duration);
+    return false;
+  })
+  // ===================== Scroll Back to Top Js End ======================
 
-    loader();
+  // ========================== add active class to ul>li top Active current page Js Start =====================
+  function dynamicActiveMenuClass(selector) {
+    let FileName = window.location.pathname.split("/").reverse()[0];
+
+    selector.find("li").each(function () {
+      let anchor = $(this).find("a");
+      if ($(anchor).attr("href") == FileName) {
+        $(this).addClass("activePage");
+      }
+    });
+    // if any li has activePage element add class
+    selector.children("li").each(function () {
+      if ($(this).find(".activePage").length) {
+        $(this).addClass("activePage");
+      }
+    });
+    // if no file name return
+    if ("" == FileName) {
+      selector.find("li").eq(0).addClass("activePage");
+    }
+  }
+  if ($('ul').length) {
+    dynamicActiveMenuClass($('ul'));
+  }
+  // ========================== add active class to ul>li top Active current page Js End =====================
+
+  
+  // ========================== Select2 Js Start =================================
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+  // ========================== Select2 Js End =================================
+
+  
+  // ========================== Select2 Js End =================================
+  $('.search-icon').on('click', function () {
+    $('.search-box').addClass('active'); 
+  }); 
+  $('.search-box__close').on('click', function () {
+    $('.search-box').removeClass('active'); 
+  }); 
+  // ========================== Select2 Js End =================================
+
+  
+  // ========================== Category Dropdown Responsive Js Start =================================
+  $('.responsive-dropdown .has-submenus-submenu').on('click', function () {
+
+    var windowWidth = $(window).width(); 
+    if(windowWidth < 992) { 
+      if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+        $(this).children('.submenus-submenu').slideUp();
+      } else {
+        $('.responsive-dropdown .has-submenus-submenu').removeClass('active');
+        $('.responsive-dropdown .has-submenus-submenu').children('.submenus-submenu').slideUp();
+  
+        $(this).addClass('active');
+        $(this).children('.submenus-submenu').slideDown();
+      }
+    }
+  });
+  // ========================== Category Dropdown Responsive Js End =================================
+
+  // ========================== On Click Category menu show Js Start =================================
+  $('.category__button').on('click', function () {    
+    $('.responsive-dropdown').addClass('active'); 
+    $('.side-overlay').addClass('show');
+    $('body').addClass('scroll-hide-sm');
+  }); 
+  $('.side-overlay, .close-responsive-dropdown').on('click', function () {    
+    $('.responsive-dropdown').removeClass('active'); 
+    $('.side-overlay').removeClass('show');
+    $('body').removeClass('scroll-hide-sm');
+  }); 
+  // ========================== On Click Category menu show Js End =================================
+
+  
+  // ========================== Set Language in dropdown Js Start =================================
+  $('.selectable-text-list li').each(function () {
+    var thisItem = $(this); 
+
+    thisItem.on('click', function () {
+      const listText = thisItem.text(); 
+      var item = thisItem.parent().parent().find('.selected-text').text(listText); 
+    }); 
+  }); 
+  // ========================== Set Language in dropdown Js End =================================
+
+  
+  // ========================= Banner Slider Js Start ==============
+  $('.banner-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#banner-next',
+    prevArrow: '#banner-prev',
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  });  
+  // ========================= Banner Slider Js End ===================
 
 
-})(jQuery); // End jQuery
+   // ========================= hot deals Slider Js Start ==============
+   $('.feature-item-wrapper').slick({
+    slidesToShow: 10,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#feature-item-wrapper-next',
+    prevArrow: '#feature-item-wrapper-prev',
+    responsive: [
+      {
+        breakpoint: 1699,
+        settings: {
+          slidesToShow: 9,
+        }
+      },
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 8,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 6,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 5,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+      {
+        breakpoint: 424,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 359,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
 
+  
+  // ========================= Banner Slider Js Start ==============
+  $('.banner-item-two__slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: true,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#banner-next',
+    prevArrow: '#banner-prev',
+    responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  });  
+  // ========================= Banner Slider Js End ===================
+
+  
+  // ========================= flash Sale Four Slider Js Start ==============
+  $('.flash-sales__slider').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#flash-next',
+    prevArrow: '#flash-prev',
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      }
+    ]
+  });  
+  // ========================= flash Sale Four Slider Js End ==================
+    
+  // ========================= hot deals Slider Js Start ==============
+  $('.hot-deals-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#deals-next',
+    prevArrow: '#deals-prev',
+    responsive: [
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+    
+    
+  // ========================= hot deals Slider Js Start ==============
+  $('.deals-week-slider').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#deal-week-next',
+    prevArrow: '#deal-week-prev',
+    responsive: [
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 5,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+    
+
+  // ========================= hot deals Slider Js Start ==============
+  $('.top-selling-product-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#top-selling-next',
+    prevArrow: '#top-selling-prev',
+    responsive: [
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.organic-food__slider').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#organic-next',
+    prevArrow: '#organic-prev',
+    responsive: [
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 6,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 4,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 424,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+
+  
+  // ========================= New arrival Slider Js Start ==============
+  $('.new-arrival__slider').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#new-arrival-next',
+    prevArrow: '#new-arrival-prev',
+    responsive: [
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 6,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 4,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 424,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= New arrival Slider Js End ===================
+
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.short-product-list').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    prevArrow: '<button type="button" class="slick-prev border border-gray-100 w-30 h-30 bg-transparent rounded-pill position-absolute hover-bg-main-600 hover-text-white hover-border-main-600 transition-1"><i class="ph ph-caret-left"></i></button>',
+    nextArrow: '<button type="button" class="slick-next border border-gray-100 w-30 h-30 bg-transparent rounded-pill position-absolute hover-bg-main-600 hover-text-white hover-border-main-600 transition-1"><i class="ph ph-caret-right"></i></button>',
+  });  
+  
+// ========================= hot deals Slider Js End ===================
+
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.brand-slider').slick({
+    slidesToShow: 8,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#brand-next',
+    prevArrow: '#brand-prev',
+    responsive: [
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 7,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 6,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 5,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 4,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 424,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 359,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+
+  
+  // ========================= Category Dropdown Two Js Start ===============================
+  $('.category-two .category__button').on('click', function () {
+    $('.category-two .category__button').toggleClass('active')
+    $('.responsive-dropdown.style-two').addClass('active').slideToggle(400); 
+  }); 
+  // ========================= Category Dropdown Two Js End ===============================
+  
+  
+  // ========================= Featured Products Slider Js Start ==============
+  $('.featured-product-slider').slick({
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#featured-products-next',
+    prevArrow: '#featured-products-prev',
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      }
+    ]
+  });  
+  // ========================= Featured Products Slider Js End ==================
+
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.recommended-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#recommended-next',
+    prevArrow: '#recommended-prev',
+    responsive: [
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.vendor-card__list.style-two').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#vendor-next',
+    prevArrow: '#vendor-prev',
+  });  
+  // ========================= hot deals Slider Js End ===================
+  
+  
+  // ========================= hot deals Slider Js Start ==============
+  $('.top-brand__slider').slick({
+    slidesToShow: 8,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1500,
+    dots: false,
+    pauseOnHover: true,
+    arrows: true,
+    draggable: true,
+    rtl: $('html').attr('dir') === 'rtl' ? true : false,
+    speed: 900,
+    infinite: true,
+    nextArrow: '#topBrand-next',
+    prevArrow: '#topBrand-prev',
+    responsive: [
+      {
+        breakpoint: 1599,
+        settings: {
+          slidesToShow: 7,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 1399,
+        settings: {
+          slidesToShow: 6,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 5,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 4,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 424,
+        settings: {
+          slidesToShow: 3,
+          arrows: false,
+        }
+      },
+      {
+        breakpoint: 359,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+        }
+      },
+    ]
+  });  
+  // ========================= hot deals Slider Js End ===================
+
+  
+  // ========================= Product Details Thumbs Slider Js Start ===================
+  $('.product-details__thumb-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.product-details__images-slider'
+  });
+
+  $('.product-details__images-slider').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    asNavFor: '.product-details__thumb-slider',
+    dots: false,
+    arrows: false,
+    focusOnSelect: true
+  });
+  // ========================= Product Details Thumbs Slider Js End ===================
+
+  
+  // ========================= Increment & Decrement Js Start ===================
+  var minus = $('.quantity__minus');
+  var plus = $('.quantity__plus');
+
+  $(plus).on('click', function () {
+    var input = $(this).siblings('.quantity__input');
+    var value = input.val(); 
+    value++;
+    input.val(value); 
+  }); 
+
+  $(minus).on('click', function () {
+    var input = $(this).siblings('.quantity__input');
+    var value = input.val(); 
+    if(value > 1) {
+      value--;
+    }
+    input.val(value); 
+  }); 
+  // ========================= Increment & Decrement Js End ===================
+
+  
+  // ========================= Color List Js Start ===================
+  $('.color-list__button').on('click', function () {
+    $('.color-list__button').removeClass('border-gray-900'); 
+
+    if(!$(this).hasClass('border-gray-900')) {
+      $(this).addClass('border-gray-900');
+      $(this).removeClass('border-gray-50');
+    } else {
+      $(this).removeClass('border-gray-900');
+      $(this).addClass('border-gray-50');
+    };
+  }); 
+  // ========================= Color List Js End ===================
+
+  // ========================== Range Slider Js Start =====================
+  $(function() {
+    $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 25,
+        values: [ 0, 25 ],
+        slide: function( event, ui ) {
+            $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        }
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+    " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+  });
+  // ========================== Range Slider Js End =====================
+
+  
+  // ========================== List Grid Js Start ================================
+  $('.list-btn').on('click', function () {
+    $('.grid-btn').addClass('border-gray-100'); 
+    $('.grid-btn').removeClass('border-main-600 text-white bg-main-600'); 
+    $('.list-grid-wrapper').removeClass('list-view'); 
+    
+    $(this).removeClass('border-gray-100'); 
+    $(this).addClass('border-main-600 text-white bg-main-600'); 
+    $('.list-grid-wrapper').addClass('list-view'); 
+  }); 
+
+  $('.grid-btn').on('click', function () {
+    $('.list-btn').addClass('border-gray-100'); 
+    $('.list-btn').removeClass('border-main-600 text-white bg-main-600'); 
+    $('.list-grid-wrapper').removeClass('list-view'); 
+
+    $(this).removeClass('border-gray-100'); 
+    $(this).addClass('border-main-600 text-white bg-main-600'); 
+  }); 
+  // ========================== List Grid Js End ================================
+
+  
+  // ========================== Shop Sidebar Js Start ================================
+  $('.sidebar-btn').on('click', function () {
+    $(this).addClass('bg-main-600 text-white');
+    $('.shop-sidebar').addClass('active');
+    $('.side-overlay').addClass('show');
+    $('body').addClass('scroll-hide-sm'); 
+  }); 
+
+  $('.side-overlay, .shop-sidebar__close').on('click', function () {
+    $('.sidebar-btn').removeClass('bg-main-600 text-white');
+    $('.shop-sidebar').removeClass('active');
+    $('.side-overlay').removeClass('show');
+    $('body').removeClass('scroll-hide-sm');
+  }); 
+  // ========================== Shop Sidebar Js End ================================
+
+  
+  // ========================== Remove Tr Js Start ================================
+  $('.remove-tr-btn').on('click', function () {
+    $(this).closest('tr').addClass('d-none')
+  }); 
+  // ========================== Remove Tr Js End ================================
+
+  
+  // ========================== Checkout Payment Method Js Start ================================
+  $('.payment-item .form-check-input:checked').closest('.payment-item').find('.payment-item__content').show();
+
+  $('.payment-item .form-check-input').on('change', function () {
+      $('.payment-item__content').hide();
+      $(this).closest('.payment-item').find('.payment-item__content').show();
+  });
+  // ========================== Checkout Payment Method Js End ================================
+
+  
+  // ================== Password Show Hide Js Start ==========
+  $(".toggle-password").on('click', function() {
+    $(this).toggleClass("active");
+    var input = $($(this).attr("id"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
+  // ========================= Password Show Hide Js End ===========================
+  
+
+  });
+  // ==========================================
+  //      End Document Ready function
+  // ==========================================
+
+  // ========================= Preloader Js Start =====================
+    $(window).on("load", function(){
+      $('.preloader').fadeOut(); 
+    })
+    // ========================= Preloader Js End=====================
+
+    // ========================= Header Sticky Js Start ==============
+    $(window).on('scroll', function() {
+      if ($(window).scrollTop() >= 260) {
+        $('.header').addClass('fixed-header');
+      }
+      else {
+          $('.header').removeClass('fixed-header');
+      }
+    }); 
+    // ========================= Header Sticky Js End===================
+
+})(jQuery);
